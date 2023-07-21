@@ -47,7 +47,8 @@ def get_posts(contentType='news', min_points=0):
         page_num += 1
         time.sleep(1)
     
-    return [post for post in posts if int(post['points']) >= min_points] 
+    filtered_posts = [post for post in posts if int(post['points']) >= min_points] 
+    return sorted(filtered_posts, key=lambda post : post['points'], reverse=True)
 
 
 if __name__ == '__main__':

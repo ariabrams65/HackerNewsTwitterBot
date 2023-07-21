@@ -1,6 +1,8 @@
 import tweepy
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 consumer_key = os.environ['TWITTER_CONSUMER_KEY']
 consumer_secret = os.environ['TWITTER_CONSUMER_SECRET']
 access_token = os.environ['TWITTER_ACCESS_TOKEN']
@@ -13,4 +15,4 @@ def send_tweet(text):
     )
     response = client.create_tweet(text=text)
 
-send_tweet('test2')
+send_tweet('test3')
