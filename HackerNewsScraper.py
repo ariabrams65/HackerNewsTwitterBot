@@ -30,6 +30,23 @@ def get_soup(url, contentType, page_num):
     return soup
 
 
+def get_posts(contentType='news'):
+    url = 'https://news.ycombinator.com/'
+    page_num = 1
+    while True:
+        soup = get_soup(url, contentType, page_num)
+        if not soup.find(class_='athing'):
+            break
+
+        athings = soup.find_all(class_='athing') 
+        sublines = soup.find_all(class_='subline')
+        for athing, subline in zip(athings, sublines):
+            yield get_post(athing, subline, url)
+        
+        page_num += 1
+        time.sleep(1)
+
+'''
 def get_posts(contentType='news', min_points=0):
     url = 'https://news.ycombinator.com/'
     posts = []
@@ -47,10 +64,10 @@ def get_posts(contentType='news', min_points=0):
         page_num += 1
         time.sleep(1)
     
-    filtered_posts = [post for post in posts if int(post['points']) >= min_points] 
-    return sorted(filtered_posts, key=lambda post : post['points'], reverse=True)
+    return [post for post in posts if int(post['points']) >= min_points] 
+'''
 
 
 if __name__ == '__main__':
-    posts = get_posts(contentType='ask', min_points=100)
+    posts = get_posts(min_points=100)
     print(json.dumps(posts, indent=4))

@@ -11,7 +11,7 @@ access_token = os.environ['TWITTER_ACCESS_TOKEN']
 access_token_secret = os.environ['TWITTER_ACCESS_TOKEN_SECRET']
 
 def get_new_post():
-    posts = get_posts(min_points=100)
+    posts = get_posts()
     with PostDatabase('posts.db') as db:
         for post in posts:
             if not db.has_post(post['id']):
