@@ -5,23 +5,22 @@ import json
 import time
 
 def get_post(athing, subline, url):
-    post = {}
     pattern = re.compile(r'\d+')
     titleline = athing.find(class_='titleline')
     sitestr_element  = titleline.find(class_='sitestr')
     comments = subline.contents[-2]
     title = titleline.find('a', class_=False)
-
-    post['title'] = str(title.string)
-    post['link'] = title['href']
-    post['source'] = None if not sitestr_element else str(sitestr_element.string)
-    post['id'] = athing['id']
-    post['points'] = pattern.match(str(subline.find(class_='score').string)).group()
-    post['time'] = subline.find(class_='age')['title']
-    post['comments_link'] = url + comments['href']
-    post['num_comments'] = '0' if comments.string == 'discuss' else pattern.match(str(comments.string)).group()
-
-    return post
+    
+    return {
+        'title' : str(title.string),
+        'link' : title['href'],
+        'source' : None if not sitestr_element else str(sitestr_element.string),
+        'id' : athing['id'],
+        'points' : pattern.match(str(subline.find(class_='score').string)).group(),
+        'time' : subline.find(class_='age')['title'],
+        'comments_link' : url + comments['href'],
+        'num_comments' : '0' if comments.string == 'discuss' else pattern.match(str(comments.string)).group(),
+    }
 
 
 def get_soup(url, contentType, page_num):
