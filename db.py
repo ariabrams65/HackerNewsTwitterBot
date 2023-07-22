@@ -14,7 +14,7 @@ class PostDatabase:
         self.conn.close()
         
     def create_table(self):
-        self.cursor.execute('CREATE TALBE IF NOT EXISTS posts(id text PRIMARY KEY)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS posts(id text PRIMARY KEY)')
         
     def has_post(self, post_id):
         self.cursor.execute('SELECT id FROM posts WHERE id = ?', (post_id,))

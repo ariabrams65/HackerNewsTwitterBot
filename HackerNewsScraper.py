@@ -52,5 +52,5 @@ def get_posts(contentType='news', min_points=0):
 
 
 if __name__ == '__main__':
-    posts = get_posts(min_points=100)
+    posts = get_posts(contentType='ask', min_points=100)
     print(json.dumps(posts, indent=4))

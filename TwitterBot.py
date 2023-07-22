@@ -17,6 +17,15 @@ def get_new_post():
             if not db.has_post(post['id']):
                 db.add_post(post['id'])
                 return post
+            
+
+def get_text_to_tweet(post):
+    text = f'{post["title"]}({post["points"]} points)\n'
+    text += f'{post["num_comments"]} comments:{post["comments_link"]}'
+    if (post['source'] is not None):
+        text += f'\n{post["link"]}'
+
+    return text
 
 
 def send_tweet(text):
@@ -28,6 +37,5 @@ def send_tweet(text):
 
 
 if __name__ == '__main__':
-
-    post = get_new_post()
-    send_tweet('test3')
+    tweet = get_text_to_tweet(get_new_post())
+    send_tweet(tweet)
