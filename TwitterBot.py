@@ -33,8 +33,11 @@ def send_tweet(text):
         access_token=access_token, access_token_secret=access_token_secret
     )
     response = client.create_tweet(text=text)
+    print(response)
 
 
 if __name__ == '__main__':
-    tweet = get_text_to_tweet(get_new_post())
-    send_tweet(tweet)
+    post = get_new_post()
+    if post is not None:
+        tweet = get_text_to_tweet(post)
+        send_tweet(tweet)
