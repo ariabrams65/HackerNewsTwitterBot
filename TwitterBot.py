@@ -20,11 +20,10 @@ def get_new_post():
             
 
 def get_text_to_tweet(post):
-    text = f'{post["title"]}({post["points"]} points)\n'
-    text += f'{post["num_comments"]} comments:{post["comments_link"]}'
+    text = f'{post["title"]}\n'
     if (post['source'] is not None):
-        text += f'\n{post["link"]}'
-
+        text += f'{post["link"]}\n\n'
+    text += f'Comments: {post["comments_link"]}'
     return text
 
 

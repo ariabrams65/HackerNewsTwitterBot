@@ -46,28 +46,8 @@ def get_posts(contentType='news'):
         page_num += 1
         time.sleep(1)
 
-'''
-def get_posts(contentType='news', min_points=0):
-    url = 'https://news.ycombinator.com/'
-    posts = []
-    page_num = 1
-    while True:
-        soup = get_soup(url, contentType, page_num)
-        if not soup.find(class_='athing'):
-            break
-
-        athings = soup.find_all(class_='athing') 
-        sublines = soup.find_all(class_='subline')
-        for athing, subline in zip(athings, sublines):
-            posts.append(get_post(athing, subline, url))
-        
-        page_num += 1
-        time.sleep(1)
-    
-    return [post for post in posts if int(post['points']) >= min_points] 
-'''
-
+import itertools
 
 if __name__ == '__main__':
-    posts = get_posts(min_points=100)
-    print(json.dumps(posts, indent=4))
+    posts = itertools.islice(get_posts(), 0, 10, 1)
+    print(json.dumps(list(posts), indent=4))
