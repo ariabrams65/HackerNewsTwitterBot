@@ -33,7 +33,6 @@ def send_tweet(text):
         access_token=access_token, access_token_secret=access_token_secret
     )
     response = client.create_tweet(text=text)
-    print(response)
 
 
 if __name__ == '__main__':
